@@ -29,7 +29,7 @@ body {
   background-color: rgba(97, 75, 75, 0.75);
   border-radius: 0.3vh;
   box-shadow: inset 2px 2px 2px rgba(128, 128, 128, 0.271),
-    inset -2px -2px 2px rgba(22, 87, 217, 0.271);
+  inset -2px -2px 2px rgba(22, 87, 217, 0.271);
 }
 
 .tetris .O,
@@ -43,18 +43,10 @@ body {
   background: var(--color-tetromino);
 }
 
-/* .tetris .O,
-.tetris .S,
-.tetris .Z {
-  background: rgb(188, 201, 10);
+div#messageAreaScore {
+  position: absolute;
+  font-size: 2rem;
+  top: calc(100vh * 0.02);
+  left: calc(100vw / 2 - width / 2);
+  color: rgb(83, 175, 19);
 }
-
-.tetris .L,
-.tetris .RL {
-  background: rgb(6, 150, 9);
-}
-
-.tetris .J,
-.tetris .T {
-  background: rgb(199, 4, 157);
-} */
