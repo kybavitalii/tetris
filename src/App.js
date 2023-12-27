@@ -7,6 +7,10 @@ class App {
         this.model = new GameModel();
         this.controller = new GameController(this.model);
     }
+
+    init() {
+        this.controller.initGame();
+    }
 }
 
-new App();
+new App().init();

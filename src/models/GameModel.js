@@ -45,6 +45,7 @@ export class GameModel {
         ],
     };
     playField;
+    tetromino = {};
     constructor() {}
 
     getRows() {
@@ -58,4 +59,12 @@ export class GameModel {
     getPlayField() {
         return this.playField;
     }
+
+    getCells() {
+        return document.querySelectorAll(".tetris div");
+    }
+
+    setTetromino() {}
+
+    getTetromino() {}
 }
