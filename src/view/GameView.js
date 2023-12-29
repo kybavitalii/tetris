@@ -1,15 +1,23 @@
 import { GameFieldGenerator } from "./GameFieldGenerator";
-import { Tetromino } from "./Tetromino";
+import { Tetro } from "./Tetro";
+import { ControlsTetro } from "./ControlsTetro";
 
 export class GameView {
+    gameTetromino;
     constructor(model, controller) {
         this.model = model;
         this.controller = controller;
         this.gameFieldGenerator = new GameFieldGenerator(this.model);
-        this.gameTetromino = new Tetromino(this.model, this.controller);
+        this.controlsTetro = new ControlsTetro(this.model, this.controller);
+        this.gameTetromino = new Tetro(this.model, this.controller, this);
+    }
+
+    getControlsTetro() {
+        return this.controlsTetro;
     }
 
     getGameTetromino() {
+        console.log(this.gameTetromino);
         return this.gameTetromino;
     }
 

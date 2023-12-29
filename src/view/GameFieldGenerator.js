@@ -15,7 +15,8 @@ export class GameFieldGenerator {
         }
 
         this.playField = new Array(this.rows).fill(0).map(() => new Array(this.columns).fill(0));
-        console.table(this.playField);
+        // console.table(this.playField);
+        return this.playField;
     }
 
     draw() {

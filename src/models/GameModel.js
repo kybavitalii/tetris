@@ -45,6 +45,7 @@ export class GameModel {
         ],
     };
     playField;
+    gameTetro;
     tetromino = {};
     constructor() {}
 
@@ -64,7 +65,23 @@ export class GameModel {
         return document.querySelectorAll(".tetris div");
     }
 
-    setTetromino() {}
+    getTetromino() {
+        return this.tetromino;
+    }
 
-    getTetromino() {}
+    getGameTetro() {
+        return this.gameTetro;
+    }
+
+    setPlayField(playfield) {
+        this.playField = playfield;
+    }
+
+    setTetromino(tetromino) {
+        this.tetromino = tetromino;
+    }
+
+    setGameTetro(tetro) {
+        this.gameTetro = tetro;
+    }
 }
