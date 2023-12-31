@@ -47,6 +47,7 @@ export class GameModel {
     playField;
     gameTetro;
     tetromino = {};
+    score = 0;
     constructor() {}
 
     getRows() {
@@ -73,6 +74,10 @@ export class GameModel {
         return this.gameTetro;
     }
 
+    getScore() {
+        return this.score;
+    }
+
     setPlayField(playfield) {
         this.playField = playfield;
     }
@@ -83,5 +88,9 @@ export class GameModel {
 
     setGameTetro(tetro) {
         this.gameTetro = tetro;
+    }
+
+    setScore(score) {
+        this.score = score;
     }
 }

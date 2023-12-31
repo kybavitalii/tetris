@@ -8,7 +8,6 @@ export class Validator {
     isValid() {
         this.tetromino = this.model.getTetromino();
         this.playField = this.model.getPlayField();
-        console.log(this.playField);
         const matrixSize = this.tetromino.matrix.length;
         for (let row = 0; row < matrixSize; row++) {
             for (let column = 0; column < matrixSize; column++) {
@@ -27,7 +26,6 @@ export class Validator {
     }
 
     isOutsideOfGameBoard(row, column) {
-        console.log(this.model.getPlayField());
         return (
             this.tetromino.column + column < 0 ||
             this.tetromino.column + column >= this.model.getColumns() ||

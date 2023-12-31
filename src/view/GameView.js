@@ -17,7 +17,6 @@ export class GameView {
     }
 
     getGameTetromino() {
-        console.log(this.gameTetromino);
         return this.gameTetromino;
     }
 

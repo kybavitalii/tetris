@@ -1,31 +1,23 @@
 import { GameView } from "../view/GameView";
+import { FilledRows } from "./FilledRows";
 
 export class GameController {
     gameFieldGenerator;
     gameField;
     gameTetromino;
     gameTetro;
-    // tetromino;
+
     constructor(model) {
         this.model = model;
         this.view = new GameView(this.model, this);
-        // this.down = this.down.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.controlsTetro = this.view.getControlsTetro();
-        // this.gameFieldGenerator = this.view.getFieldGenerator();
-        // this.gameTetromino = this.view.getGameTetromino();
-        // this.tetromino = new Tetromino(this.model, this);
+        this.finderFilledRows = new FilledRows(this.model, this);
     }
-
-    // getGameTetromino() {
-    //     return this.gameTetromino;
-    // }
 
     initGame() {
         this.gameFieldGenerator = this.view.getFieldGenerator();
         this.gameTetromino = this.view.getGameTetromino();
-
-        // console.log(this.gameTetromino);
         this.gameField = this.gameFieldGenerator.generate();
         this.model.setPlayField(this.gameField);
         this.gameFieldGenerator.draw();
@@ -33,6 +25,7 @@ export class GameController {
         this.gameTetromino.draw();
         this.gameTetro = this.view.getGameTetromino();
         this.model.setGameTetro(this.gameTetro);
+        this.view.displayScore(this.model.getScore());
         document.addEventListener("keydown", this.onKeyDown, false);
     }
 
@@ -70,46 +63,8 @@ export class GameController {
                 // toggleGame();
                 break;
         }
-        // this.view.getGameTetromino().draw();
+        this.finderFilledRows.find();
+        this.view.displayScore(this.model.getScore());
         this.view.draw();
-        //     GameView.draw()
     }
-
-    // startGame() {
-    //     isStarted = true;
-    //     timerId = setInterval(() => autoMove(), 1000);
-    // }
-    //
-    // pauseGame() {
-    //     isStarted = false;
-    //     clearInterval(timerId);
-    // }
-    //
-    // moveTetrominoDown() {
-    //     if (isStarted) {
-    //         tetromino.row += 1;
-    //     }
-    //     if (isValid()) {
-    //         tetromino.row -= 1;
-    //         placeTetromino();
-    //     }
-    // }
-    //
-    // moveTetrominoLeft() {
-    //     if (isStarted) {
-    //         tetromino.column -= 1;
-    //     }
-    //     if (isValid()) {
-    //         tetromino.column += 1;
-    //     }
-    // }
-    //
-    // moveTetrominoRight() {
-    //     if (isStarted) {
-    //         tetromino.column += 1;
-    //     }
-    //     if (isValid()) {
-    //         tetromino.column -= 1;
-    //     }
-    // }
 }
