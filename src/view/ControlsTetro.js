@@ -13,6 +13,7 @@ export class ControlsTetro {
     refreshTetromino() {
         this.tetromino = this.model.getTetromino();
         this.tetro = this.model.getGameTetro();
+        this.model.setValidator(this.validator);
     }
 
     dropTetrominoDown() {

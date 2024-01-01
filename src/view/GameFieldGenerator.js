@@ -1,6 +1,7 @@
 import { ConvertPositionToIndex } from "../models/ConvertPositionToIndex";
 
 export class GameFieldGenerator {
+    tetris = document.querySelector(".tetris");
     constructor(model) {
         this.rows = model.getRows();
         this.columns = model.getColumns();
@@ -8,14 +9,18 @@ export class GameFieldGenerator {
         this.model = model;
     }
 
+    reset() {
+        this.tetris.innerHTML = "";
+    }
+
     generate() {
         for (let i = 0; i < this.rows * this.columns; i++) {
             const div = document.createElement("div");
-            document.querySelector(".tetris").append(div);
+            this.tetris.append(div);
         }
 
         this.playField = new Array(this.rows).fill(0).map(() => new Array(this.columns).fill(0));
-        // console.table(this.playField);
+
         return this.playField;
     }
 
@@ -25,7 +30,7 @@ export class GameFieldGenerator {
             for (let column = 0; column < this.columns; column++) {
                 const name = this.playField[row][column];
                 const cellIndex = new ConvertPositionToIndex(row, this.columns, column).getIndex();
-                // console.table(cells);
+
                 cells[cellIndex].classList.add(name);
             }
         }

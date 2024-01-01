@@ -33,6 +33,11 @@ export class Validator {
         );
     }
 
+    isOutsideTopBoard(row) {
+        console.log(row, this.tetromino.row);
+        return this.tetromino.row + row < 0;
+    }
+
     hasCollisions(row, column) {
         return this.playField[this.tetromino.row + row]?.[this.tetromino.column + column];
     }

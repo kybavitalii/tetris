@@ -15,7 +15,7 @@ export class Tetro {
     }
 
     generate() {
-        const startPosition = 3;
+        const startPosition = -2;
         const nameTetro = this.randomTetromino();
         const matrixTetro = this.model.TETROMINOES[nameTetro];
         const rowTetro = startPosition;
@@ -59,15 +59,17 @@ export class Tetro {
         const tetromino = this.model.getTetromino();
         const playField = this.model.getPlayField();
         const matrixSize = tetromino.matrix.length;
+        const validator = this.model.getValidator();
         for (let row = 0; row < matrixSize; row++) {
             for (let column = 0; column < matrixSize; column++) {
                 if (!tetromino.matrix[row][column]) continue;
+                if (validator.isOutsideTopBoard(row)) {
+                    this.controller.isGameOver = true;
+                    return;
+                }
                 playField[tetromino.row + row][tetromino.column + column] = this.model.TETROMINO_NAMES[0];
             }
         }
-        // const filledRows = findFilledRows();
-        // removeFillRows(filledRows);
         this.generate();
-        // generateTetromino();
     }
 }

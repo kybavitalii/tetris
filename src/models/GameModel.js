@@ -1,3 +1,5 @@
+import { Validator } from "./Validator";
+
 export class GameModel {
     PLAYFIELD_COLUMNS = 10;
     PLAYFIELD_ROWS = 20;
@@ -48,6 +50,7 @@ export class GameModel {
     gameTetro;
     tetromino = {};
     score = 0;
+    validator;
     constructor() {}
 
     getRows() {
@@ -78,6 +81,10 @@ export class GameModel {
         return this.score;
     }
 
+    getValidator() {
+        return this.validator;
+    }
+
     setPlayField(playfield) {
         this.playField = playfield;
     }
@@ -92,5 +99,9 @@ export class GameModel {
 
     setScore(score) {
         this.score = score;
+    }
+
+    setValidator(validator) {
+        this.validator = validator;
     }
 }

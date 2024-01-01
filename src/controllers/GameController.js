@@ -10,20 +10,25 @@ export class GameController {
     requestId;
     isPaused = false;
     isGameOver = false;
+    btnRestart = document.querySelector(".restart");
+    gameOverBlock = document.querySelector(".game-over");
 
     constructor(model) {
         this.model = model;
         this.view = new GameView(this.model, this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.down = this.down.bind(this);
+        this.initGame = this.initGame.bind(this);
         this.controlsTetro = this.view.getControlsTetro();
         this.finderFilledRows = new FilledRows(this.model, this);
+        this.btnRestart.addEventListener("click", this.initGame);
     }
-
     initGame() {
-        // gameOverBlock.style.display = "none";
+        this.gameOverBlock.style.display = "none";
         this.isGameOver = false;
         this.gameFieldGenerator = this.view.getFieldGenerator();
+        this.gameFieldGenerator.reset();
+        this.model.setPlayField([]);
         this.gameTetromino = this.view.getGameTetromino();
         this.gameField = this.gameFieldGenerator.generate();
         this.model.setPlayField(this.gameField);
@@ -38,6 +43,8 @@ export class GameController {
     }
 
     down() {
+        this.finderFilledRows.find();
+        this.view.displayScore(this.model.getScore());
         this.controlsTetro.moveTetrominoDown();
         this.view.draw();
         this.stopGame();
@@ -81,29 +88,21 @@ export class GameController {
                 this.controlsTetro.dropTetrominoDown();
                 break;
         }
-        this.finderFilledRows.find();
-        this.view.displayScore(this.model.getScore());
         this.view.draw();
     }
 
     togglePauseGame() {
         this.isPaused = !this.isPaused;
-
-        if (this.isPaused) {
-            this.stopGame();
-        } else {
-            this.startGame();
-        }
+        this.isPaused ? this.stopGame() : this.startGame();
     }
 
     gameOver() {
-        const gameOverBlock = document.querySelector(".game-over");
         this.stopGame();
-        gameOverBlock.style.display = "flex";
+        this.gameOverBlock.style.display = "flex";
     }
 
     startGame() {
-        this.timeOutId = setTimeout(() => (this.requestId = requestAnimationFrame(this.down)), 1000);
+        this.timeOutId = setTimeout(() => (this.requestId = requestAnimationFrame(this.down)), 800);
     }
 
     stopGame() {
