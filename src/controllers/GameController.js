@@ -6,16 +6,23 @@ export class GameController {
     gameField;
     gameTetromino;
     gameTetro;
+    timeOutId;
+    requestId;
+    isPaused = false;
+    isGameOver = false;
 
     constructor(model) {
         this.model = model;
         this.view = new GameView(this.model, this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.down = this.down.bind(this);
         this.controlsTetro = this.view.getControlsTetro();
         this.finderFilledRows = new FilledRows(this.model, this);
     }
 
     initGame() {
+        // gameOverBlock.style.display = "none";
+        this.isGameOver = false;
         this.gameFieldGenerator = this.view.getFieldGenerator();
         this.gameTetromino = this.view.getGameTetromino();
         this.gameField = this.gameFieldGenerator.generate();
@@ -27,10 +34,17 @@ export class GameController {
         this.model.setGameTetro(this.gameTetro);
         this.view.displayScore(this.model.getScore());
         document.addEventListener("keydown", this.onKeyDown, false);
+        this.startGame();
     }
 
     down() {
         this.controlsTetro.moveTetrominoDown();
+        this.view.draw();
+        this.stopGame();
+        this.startGame();
+        if (this.isGameOver) {
+            this.gameOver();
+        }
     }
 
     left() {
@@ -46,6 +60,10 @@ export class GameController {
     }
 
     onKeyDown(event) {
+        if (event.key === "Enter") {
+            this.togglePauseGame();
+        }
+        if (this.isPaused) return;
         switch (event.key) {
             case "ArrowDown":
                 this.down();
@@ -60,11 +78,36 @@ export class GameController {
                 this.rotate();
                 break;
             case " ":
-                // toggleGame();
+                this.controlsTetro.dropTetrominoDown();
                 break;
         }
         this.finderFilledRows.find();
         this.view.displayScore(this.model.getScore());
         this.view.draw();
+    }
+
+    togglePauseGame() {
+        this.isPaused = !this.isPaused;
+
+        if (this.isPaused) {
+            this.stopGame();
+        } else {
+            this.startGame();
+        }
+    }
+
+    gameOver() {
+        const gameOverBlock = document.querySelector(".game-over");
+        this.stopGame();
+        gameOverBlock.style.display = "flex";
+    }
+
+    startGame() {
+        this.timeOutId = setTimeout(() => (this.requestId = requestAnimationFrame(this.down)), 1000);
+    }
+
+    stopGame() {
+        cancelAnimationFrame(this.requestId);
+        this.timeOutId = clearTimeout(this.timeOutId);
     }
 }

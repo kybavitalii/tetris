@@ -15,11 +15,17 @@ export class ControlsTetro {
         this.tetro = this.model.getGameTetro();
     }
 
+    dropTetrominoDown() {
+        this.refreshTetromino();
+        while (!this.validator.isValid()) {
+            this.tetromino.row++;
+        }
+        this.tetromino.row--;
+    }
+
     moveTetrominoDown() {
         this.refreshTetromino();
-        // if (isStarted) {
         this.tetromino.row += 1;
-        // }
         if (this.validator.isValid()) {
             this.tetromino.row -= 1;
             this.tetro.placeTetromino();
@@ -28,9 +34,7 @@ export class ControlsTetro {
 
     moveTetrominoLeft() {
         this.refreshTetromino();
-        // if (isStarted) {
         this.tetromino.column -= 1;
-        // }
         if (this.validator.isValid()) {
             this.tetromino.column += 1;
         }
@@ -38,9 +42,7 @@ export class ControlsTetro {
 
     moveTetrominoRight() {
         this.refreshTetromino();
-        // if (isStarted) {
         this.tetromino.column += 1;
-        // }
         if (this.validator.isValid()) {
             this.tetromino.column -= 1;
         }
@@ -48,13 +50,11 @@ export class ControlsTetro {
 
     rotateTetromino() {
         this.refreshTetromino();
-        // if (isStarted) {
         const oldMatrix = this.tetromino.matrix;
         this.tetromino.matrix = this.rotateMatrix(this.tetromino.matrix);
         if (this.validator.isValid()) {
             this.tetromino.matrix = oldMatrix;
         }
-        // }
     }
 
     rotateMatrix(matrixTetromino) {
