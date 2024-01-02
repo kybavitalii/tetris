@@ -24,6 +24,7 @@ export class GameController {
         this.btnRestart.addEventListener("click", this.initGame);
     }
     initGame() {
+        this.model.setScore(0);
         this.gameOverBlock.style.display = "none";
         this.isGameOver = false;
         this.gameFieldGenerator = this.view.getFieldGenerator();

@@ -1,5 +1,3 @@
-import { Validator } from "./Validator";
-
 export class GameModel {
     PLAYFIELD_COLUMNS = 10;
     PLAYFIELD_ROWS = 20;
