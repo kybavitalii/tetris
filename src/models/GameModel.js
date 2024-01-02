@@ -1,8 +1,16 @@
 export class GameModel {
     PLAYFIELD_COLUMNS = 10;
     PLAYFIELD_ROWS = 20;
-    TETROMINO_NAMES = ["O", "L", "RL", "J", "S", "Z", "T", "I"];
+    TETROMINO_EASY = ["DOT", "DABBLE", "O", "L", "RL", "T", "I", "J"];
+    TETROMINO_MIDDLE = ["DOT", "DABBLE", "O", "L", "RL", "T", "I", "J", "S", "Z"];
+    TETROMINO_HARD = ["DOT", "DABBLE", "O", "L", "RL", "T", "I", "J", "S", "Z", "BIGT", "X"];
+    TETROMINO_NAMES = this.TETROMINO_EASY;
     TETROMINOES = {
+        DOT: [[1]],
+        DABBLE: [
+            [1, 1],
+            [0, 0],
+        ],
         O: [
             [1, 1],
             [1, 1],
@@ -16,6 +24,17 @@ export class GameModel {
             [0, 0, 0],
             [1, 1, 1],
             [0, 0, 1],
+        ],
+        T: [
+            [1, 1, 1],
+            [0, 1, 0],
+            [0, 0, 0],
+        ],
+        I: [
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
         ],
         J: [
             [1, 1, 0],
@@ -32,16 +51,15 @@ export class GameModel {
             [0, 1, 0],
             [0, 1, 1],
         ],
-        T: [
+        BIGT: [
             [1, 1, 1],
             [0, 1, 0],
-            [0, 0, 0],
+            [0, 1, 0],
         ],
-        I: [
-            [0, 0, 0, 0],
-            [1, 1, 1, 1],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
+        X: [
+            [0, 1, 0],
+            [1, 1, 1],
+            [0, 1, 0],
         ],
     };
     playField;

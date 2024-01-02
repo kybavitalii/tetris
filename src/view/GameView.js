@@ -24,9 +24,9 @@ export class GameView {
         return this.gameFieldGenerator;
     }
 
-    displayScore(score) {
+    displayScore(score, next) {
         const scoreArea = document.getElementById("messageAreaScore");
-        scoreArea.innerHTML = score;
+        scoreArea.innerHTML = `Score: ${score}, Next: ${next}`;
     }
 
     draw() {

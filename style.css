@@ -33,6 +33,11 @@ body {
   inset -2px -2px 2px rgba(22, 87, 217, 0.271);
 }
 
+
+.tetris .DABBLE,
+.tetris .X,
+.tetris .BIGT,
+.tetris .DOT,
 .tetris .O,
 .tetris .S,
 .tetris .Z,
