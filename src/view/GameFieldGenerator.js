@@ -7,6 +7,7 @@ export class GameFieldGenerator {
         this.columns = model.getColumns();
         this.playField = model.getPlayField();
         this.model = model;
+        this.convertorPositionToIndex = new ConvertPositionToIndex();
     }
 
     reset() {
@@ -29,7 +30,7 @@ export class GameFieldGenerator {
         for (let row = 0; row < this.rows; row++) {
             for (let column = 0; column < this.columns; column++) {
                 const name = this.playField[row][column];
-                const cellIndex = new ConvertPositionToIndex(row, this.columns, column).getIndex();
+                const cellIndex = this.convertorPositionToIndex.getIndex(row, this.columns, column);
 
                 cells[cellIndex].classList.add(name);
             }

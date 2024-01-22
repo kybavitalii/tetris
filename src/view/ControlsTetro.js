@@ -3,10 +3,9 @@ import { Validator } from "../models/Validator";
 export class ControlsTetro {
     tetromino;
     tetro;
-    constructor(model, controller, view) {
+    constructor(model, controller) {
         this.model = model;
         this.controller = controller;
-        this.view = view;
         this.validator = new Validator(this.model);
     }
 

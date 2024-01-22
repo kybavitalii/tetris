@@ -6,7 +6,6 @@ export class GameController {
     gameFieldGenerator;
     gameField;
     gameTetromino;
-    gameTetro;
     timeOutId;
     requestId;
     speed = 800;
@@ -30,7 +29,7 @@ export class GameController {
     resetGame(gameFieldGenerator) {
         this.model.TETROMINO_NAMES = this.model.TETROMINO_EASY;
         this.model.setScore(0);
-        this.setDifficulties.comutate(this.model.getScore(), this.speed);
+        this.setDifficulties.compute(this.model.getScore(), this.speed);
         this.speed = this.setDifficulties.speed;
         this.gameOverBlock.style.display = "none";
         this.isGameOver = false;
@@ -47,17 +46,16 @@ export class GameController {
         this.gameFieldGenerator.draw();
         this.gameTetromino.generate();
         this.gameTetromino.draw();
-        this.gameTetro = this.view.getGameTetromino();
-        this.model.setGameTetro(this.gameTetro);
-        this.view.displayScore(this.model.getScore()); //************************
+        this.model.setGameTetro(this.gameTetromino);
+        this.view.displayScore(this.model.getScore());
         document.addEventListener("keydown", this.onKeyDown, false);
         this.startGame();
     }
 
     down() {
         this.finderFilledRows.find();
-        this.view.displayScore(this.model.getScore()); //************************
-        this.setDifficulties.comutate(this.model.getScore(), this.speed);
+        this.view.displayScore(this.model.getScore());
+        this.setDifficulties.compute(this.model.getScore(), this.speed);
         this.speed = this.setDifficulties.speed;
         this.controlsTetro.moveTetrominoDown();
         this.view.draw();
@@ -116,7 +114,6 @@ export class GameController {
     }
 
     startGame() {
-        // console.log(this.speed);
         this.timeOutId = setTimeout(() => (this.requestId = requestAnimationFrame(this.down)), this.speed);
     }
 

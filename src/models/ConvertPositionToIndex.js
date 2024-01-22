@@ -1,11 +1,7 @@
 export class ConvertPositionToIndex {
-    constructor(row, columns, column) {
-        this.row = row;
-        this.column = column;
-        this.columns = columns;
-    }
+    constructor() {}
 
-    getIndex() {
-        return this.row * this.columns + this.column;
+    getIndex(row, columns, column) {
+        return row * columns + column;
     }
 }

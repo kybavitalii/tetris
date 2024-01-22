@@ -14,10 +14,10 @@ export class Validator {
                 if (!this.tetromino.matrix[row][column]) {
                     continue;
                 }
-                if (this.isOutsideOfGameBoard(row, column)) {
+                if (this.isOutsideOfGameBoard(row, column, this.tetromino)) {
                     return true;
                 }
-                if (this.hasCollisions(row, column)) {
+                if (this.hasCollisions(row, column, this.tetromino)) {
                     return true;
                 }
             }
@@ -34,7 +34,6 @@ export class Validator {
     }
 
     isOutsideTopBoard(row) {
-        console.log(row, this.tetromino.row);
         return this.tetromino.row + row < 0;
     }
 

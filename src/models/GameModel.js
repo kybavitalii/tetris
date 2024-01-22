@@ -120,4 +120,8 @@ export class GameModel {
     setValidator(validator) {
         this.validator = validator;
     }
+
+    setTetrominoNames(name) {
+        this.TETROMINO_NAMES = name;
+    }
 }

@@ -6,6 +6,7 @@ export class Tetro {
     constructor(model, controller) {
         this.model = model;
         this.controller = controller;
+        this.convertorPositionToIndex = new ConvertPositionToIndex();
     }
 
     randomTetromino() {
@@ -31,20 +32,20 @@ export class Tetro {
     }
 
     draw() {
-        const name = this.model.tetromino.name;
-        const color = this.model.tetromino.color;
-        const tetrominoMatrixSize = this.model.tetromino.matrix.length;
+        const name = this.model.getTetromino().name;
+        const color = this.model.getTetromino().color;
+        const tetrominoMatrixSize = this.model.getTetromino().matrix.length;
         const cells = this.model.getCells();
         for (let row = 0; row < tetrominoMatrixSize; row++) {
             for (let column = 0; column < tetrominoMatrixSize; column++) {
-                if (this.model.tetromino.matrix[row][column] === 0) continue;
-                if (this.model.tetromino.row + row < 0) continue;
+                if (this.model.getTetromino().matrix[row][column] === 0) continue;
+                if (this.model.getTetromino().row + row < 0) continue;
 
-                const cellIndex = new ConvertPositionToIndex( //кожну ітерацію новий інстанс
-                    this.model.tetromino.row + row,
+                const cellIndex = this.convertorPositionToIndex.getIndex(
+                    this.model.getTetromino().row + row,
                     this.model.getColumns(),
-                    this.model.tetromino.column + column
-                ).getIndex();
+                    this.model.getTetromino().column + column
+                );
                 cells[cellIndex].classList.add(name);
                 cells[cellIndex].style.setProperty("--color-tetromino", color);
             }
@@ -67,7 +68,7 @@ export class Tetro {
                     this.controller.isGameOver = true;
                     return;
                 }
-                playField[tetromino.row + row][tetromino.column + column] = this.model.TETROMINO_NAMES[0];
+                playField[tetromino.row + row][tetromino.column + column] = tetromino.name;
             }
         }
         this.generate();

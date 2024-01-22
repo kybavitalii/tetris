@@ -10,22 +10,22 @@ export class SetDifficulties {
         this.names = this.model.TETROMINO_NAMES;
     }
 
-    comutate(score, speed) {
+    compute(score, speed) {
         switch (score) {
             case 0:
-                this.model.TETROMINO_NAMES = this.easy;
+                this.model.setTetrominoNames(this.easy);
                 this.speed = speed;
                 break;
             case 100:
-                this.model.TETROMINO_NAMES = this.middle;
+                this.model.setTetrominoNames(this.middle);
                 this.speed = 700;
                 break;
             case 140:
-                this.model.TETROMINO_NAMES = this.hard;
+                this.model.setTetrominoNames(this.hard);
                 this.speed = 600;
                 break;
             case 190:
-                this.model.TETROMINO_NAMES = this.hard;
+                this.model.setTetrominoNames(this.hard);
                 this.speed = 500;
                 break;
         }

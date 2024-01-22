@@ -1,11 +1,14 @@
 export class ScoreCalculator {
     score;
+    // FilledRows = 0;
     constructor(model, controller) {
         this.model = model;
         this.controller = controller;
     }
 
     calculate(filledRows) {
+        // console.log(filledRows)
+        // this.FilledRows += filledRows.length;
         this.score = this.model.getScore();
         switch (filledRows.length) {
             case 1:
@@ -22,5 +25,6 @@ export class ScoreCalculator {
                 break;
         }
         this.model.setScore(this.score);
+        // console.log(this.FilledRows);
     }
 }

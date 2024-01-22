@@ -32,6 +32,7 @@ export class FilledRows {
     }
 
     removeFillRows(filledRows) {
+        if (filledRows.length < 1) return;
         filledRows.forEach((row) => {
             this.dropRowsAbove(row);
         });
@@ -41,5 +42,6 @@ export class FilledRows {
         for (let row = rowDelete; row > 0; row--) {
             this.playField[row] = this.playField[row - 1];
         }
+        this.playField[0] = new Array(this.columns).fill(0);
     }
 }
